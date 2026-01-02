@@ -52,7 +52,299 @@ nav a:hover { opacity:0.6; }
 .world-content { position: relative; z-index:1; }
 .world-title { font-size:3rem; margin-bottom:25px; position:relative; animation: fadeUp 1s ease forwards; }
 .world-title::after { content:""; display:block; width:80px; height:2px; margin:12px auto 0; border-radius:1px; }
-.world-desc { font-size:1.1rem; padding:20px 30px; border-radius:12px; margin-bottom:50px; position:relative; animation: fadeUp 1.2s ease forwards; }
+.world-desc { font-size:1.1rem; padding:20px 30px; border-radius:12px; margin-bottom:30px; position:relative; animation: fadeUp 1.2s ease forwards; }
+
+/* КНОПКИ ABOUT - ОБЩИЕ СТИЛИ */
+.about-buttons { 
+    margin-bottom: 50px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.about-btn {
+    position: relative;
+    padding: 18px 40px;
+    font-size: 1rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    overflow: hidden;
+    z-index: 1;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    min-width: 250px;
+}
+
+/* КНОПКА АНГЕЛОВ */
+.angels .about-btn {
+    color: #e6f7ff;
+    text-shadow: 0 0 15px rgba(207, 220, 242, 0.7);
+    font-family: 'Cinzel Decorative', serif;
+}
+
+.angels .about-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, 
+        rgba(207, 220, 242, 0.1) 0%,
+        rgba(138, 180, 248, 0.2) 50%,
+        rgba(207, 220, 242, 0.1) 100%);
+    border-radius: 12px;
+    z-index: -1;
+    border: 1px solid rgba(207, 220, 242, 0.3);
+    box-shadow: 
+        inset 0 0 30px rgba(207, 220, 242, 0.1),
+        0 0 30px rgba(207, 220, 242, 0.2),
+        0 0 0 1px rgba(207, 220, 242, 0.1);
+    transition: all 0.5s ease;
+}
+
+.angels .about-btn::after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, 
+        transparent 30%,
+        rgba(207, 220, 242, 0.4) 50%,
+        transparent 70%);
+    border-radius: 14px;
+    z-index: -2;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.angels .about-btn:hover::before {
+    background: linear-gradient(135deg, 
+        rgba(207, 220, 242, 0.2) 0%,
+        rgba(138, 180, 248, 0.3) 50%,
+        rgba(207, 220, 242, 0.2) 100%);
+    box-shadow: 
+        inset 0 0 40px rgba(207, 220, 242, 0.2),
+        0 0 50px rgba(138, 180, 248, 0.4),
+        0 0 0 1px rgba(207, 220, 242, 0.2);
+    transform: translateY(-3px);
+}
+
+.angels .about-btn:hover::after {
+    opacity: 1;
+    animation: angelShine 2s linear infinite;
+}
+
+/* ИКОНКА АНГЕЛОВ */
+.angel-icon {
+    position: relative;
+    font-size: 1.3rem;
+    color: #cfdcf2;
+    text-shadow: 0 0 10px rgba(207, 220, 242, 0.8);
+    animation: angelFloat 3s ease-in-out infinite;
+}
+
+.angel-icon::before,
+.angel-icon::after {
+    content: '✦';
+    position: absolute;
+    opacity: 0.6;
+    animation: angelSpin 4s linear infinite;
+}
+
+.angel-icon::before {
+    top: -10px;
+    left: -15px;
+    font-size: 0.7rem;
+    animation-delay: 0s;
+    animation-direction: reverse;
+}
+
+.angel-icon::after {
+    bottom: -10px;
+    right: -15px;
+    font-size: 0.7rem;
+    animation-delay: 1s;
+}
+
+/* ТЕКСТ АНГЕЛОВ */
+.angel-text {
+    background: linear-gradient(45deg, #e6f7ff, #cfdcf2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    position: relative;
+    padding: 0 5px;
+}
+
+/* КНОПКА ДЕМОНОВ */
+.demons .about-btn {
+    color: #ffcccc;
+    text-shadow: 0 0 15px rgba(200, 90, 90, 0.7);
+    font-family: 'Orbitron', sans-serif;
+    letter-spacing: 3px;
+}
+
+.demons .about-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, 
+        rgba(200, 90, 90, 0.1) 0%,
+        rgba(150, 0, 0, 0.2) 50%,
+        rgba(200, 90, 90, 0.1) 100%);
+    border-radius: 12px;
+    z-index: -1;
+    border: 1px solid rgba(200, 90, 90, 0.3);
+    box-shadow: 
+        inset 0 0 30px rgba(200, 90, 90, 0.1),
+        0 0 30px rgba(200, 90, 90, 0.2),
+        0 0 0 1px rgba(200, 90, 90, 0.1);
+    transition: all 0.5s ease;
+}
+
+.demons .about-btn::after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, 
+        transparent 30%,
+        rgba(255, 0, 0, 0.3) 50%,
+        transparent 70%);
+    border-radius: 14px;
+    z-index: -2;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.demons .about-btn:hover::before {
+    background: linear-gradient(135deg, 
+        rgba(200, 90, 90, 0.2) 0%,
+        rgba(150, 0, 0, 0.3) 50%,
+        rgba(200, 90, 90, 0.2) 100%);
+    box-shadow: 
+        inset 0 0 40px rgba(200, 90, 90, 0.2),
+        0 0 50px rgba(255, 0, 0, 0.4),
+        0 0 0 1px rgba(200, 90, 90, 0.2);
+    transform: translateY(-3px);
+}
+
+.demons .about-btn:hover::after {
+    opacity: 1;
+    animation: demonShine 2s linear infinite;
+}
+
+/* ИКОНКА ДЕМОНОВ */
+.demon-icon {
+    position: relative;
+    font-size: 1.3rem;
+    color: #c85a5a;
+    text-shadow: 0 0 10px rgba(200, 90, 90, 0.8);
+    animation: demonPulse 1.5s ease-in-out infinite;
+}
+
+.demon-icon::before,
+.demon-icon::after {
+    content: '⛧';
+    position: absolute;
+    opacity: 0.6;
+    animation: demonFloat 2s ease-in-out infinite;
+}
+
+.demon-icon::before {
+    top: -8px;
+    left: -12px;
+    font-size: 0.6rem;
+    animation-delay: 0.3s;
+}
+
+.demon-icon::after {
+    bottom: -8px;
+    right: -12px;
+    font-size: 0.6rem;
+    animation-delay: 0.6s;
+}
+
+/* ТЕКСТ ДЕМОНОВ */
+.demon-text {
+    background: linear-gradient(45deg, #ffcccc, #c85a5a);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    position: relative;
+    padding: 0 5px;
+}
+
+/* ОБЩИЕ ЭФФЕКТЫ ДЛЯ ОБЕИХ КНОПОК */
+.about-btn:hover .angel-icon,
+.about-btn:hover .demon-icon {
+    animation-play-state: paused;
+}
+
+.about-btn:hover {
+    transform: translateY(-5px);
+    filter: brightness(1.2);
+}
+
+/* АНИМАЦИИ ДЛЯ КНОПОК */
+@keyframes angelFloat {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-5px) rotate(5deg); }
+}
+
+@keyframes angelSpin {
+    0% { transform: rotate(0deg) scale(1); opacity: 0.6; }
+    50% { transform: rotate(180deg) scale(1.2); opacity: 0.8; }
+    100% { transform: rotate(360deg) scale(1); opacity: 0.6; }
+}
+
+@keyframes angelShine {
+    0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+    100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+}
+
+@keyframes demonPulse {
+    0%, 100% { 
+        transform: scale(1) rotate(0deg); 
+        filter: drop-shadow(0 0 5px rgba(200, 90, 90, 0.5));
+    }
+    50% { 
+        transform: scale(1.1) rotate(180deg); 
+        filter: drop-shadow(0 0 10px rgba(255, 0, 0, 0.7));
+    }
+}
+
+@keyframes demonFloat {
+    0%, 100% { 
+        transform: translateY(0) rotate(0deg);
+        opacity: 0.6;
+    }
+    50% { 
+        transform: translateY(-4px) rotate(10deg);
+        opacity: 0.8;
+    }
+}
+
+@keyframes demonShine {
+    0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+    100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+}
 
 /* CARDS */
 .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 30px; width: 100%; perspective: 1200px; }
@@ -124,6 +416,25 @@ nav a:hover { opacity:0.6; }
     grid-template-columns: 320px 1fr;
     gap: 44px;
     padding: 46px;
+}
+
+/* Сетка детального описания для миров (world-detail) */
+.world-detail .detail-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding: 46px;
+}
+
+.world-detail img {
+    width: 100%;
+    max-width: 600px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 16px;
+    margin: 0 auto;
+    box-shadow: 0 0 30px rgba(0,0,0,0.6);
+    display: block;
 }
 
 .detail-grid img {
@@ -393,7 +704,7 @@ footer { text-align:center; padding:30px; font-size:0.85rem; color:#777; border-
 
 .demons .card:hover .card-inner::before {
     opacity: 1;
-    letter-spacing: 8px; /* Увеличиваем межбуквенное расстояние при наведении */
+    transform: rotate(-315deg);
 }
 
 .demons .card:hover::before {
@@ -414,6 +725,20 @@ footer { text-align:center; padding:30px; font-size:0.85rem; color:#777; border-
     .detail-grid img {
         max-width: 250px;
         margin: 0 auto;
+    }
+    
+    .world-detail .detail-grid {
+        padding: 30px;
+    }
+    
+    .world-detail img {
+        height: 200px;
+    }
+    
+    .about-btn {
+        padding: 15px 30px;
+        min-width: 200px;
+        font-size: 0.9rem;
     }
 }
 </style>
@@ -448,6 +773,14 @@ footer { text-align:center; padding:30px; font-size:0.85rem; color:#777; border-
 <div class="world-content">
     <div class="world-title">Angelic Enlightenment</div>
     <div class="world-desc">A transcendent realm of harmony and radiant silence. Souls are refined beyond mortal weakness.</div>
+    
+    <!-- Кнопка About для ангелов -->
+    <div class="about-buttons">
+        <button class="about-btn" data-world="angel">
+            <span class="angel-icon">✦</span>
+            <span class="angel-text">About this World</span>
+        </button>
+    </div>
 
     <div class="cards">
         <!-- Seraph Card -->
@@ -520,6 +853,14 @@ footer { text-align:center; padding:30px; font-size:0.85rem; color:#777; border-
 <div class="world-content">
     <div class="world-title">Infernal Descent</div>
     <div class="world-desc">A fractured dominion of hunger and ambition. Souls are reforged through conflict.</div>
+    
+    <!-- Кнопка About для демонов -->
+    <div class="about-buttons">
+        <button class="about-btn" data-world="demon">
+            <span class="demon-icon">⛧</span>
+            <span class="demon-text">About this World</span>
+        </button>
+    </div>
 
     <div class="cards">
         <!-- Unnamed Bot Card -->
@@ -579,6 +920,7 @@ footer { text-align:center; padding:30px; font-size:0.85rem; color:#777; border-
                 </div>
             </div>
         </div>
+    </div>
 
     <!-- Demon Particles -->
     <div class="particle" style="top:80%; left:25%; animation-delay:0s;"></div>
@@ -591,6 +933,165 @@ footer { text-align:center; padding:30px; font-size:0.85rem; color:#777; border-
 
 <!-- Детальные описания (скрыты по умолчанию) -->
 <div class="overlay" id="overlay"></div>
+
+<!-- Angel World Detail -->
+<div class="detail world-detail angel-detail" id="angel-world-detail">
+    <div class="close-btn">&times;</div>
+    <div class="detail-grid">
+        <img src="https://i.ibb.co/7ypZjZK/angel1.png" alt="Angelic Realm">
+        <div>
+            <h2>Angelic Enlightenment</h2>
+            <div class="block">
+                <h4>The Celestial Realm</h4>
+                <p>
+                    Angelic Enlightenment is not merely a destination—it is a state of being. 
+                    This realm exists beyond physical constraints, a dimension of pure consciousness 
+                    where souls shed their mortal limitations and become one with divine harmony.
+                </p>
+                <p>
+                    Time flows differently here, measured not in hours but in moments of eternal peace. 
+                    The architecture is crafted from solidified light, crystalline structures that sing 
+                    with celestial frequencies. Pain, fear, and suffering are concepts long forgotten, 
+                    replaced by a profound understanding of cosmic unity.
+                </p>
+            </div>
+            <div class="block">
+                <h4>Core Principles</h4>
+                <div class="traits">
+                    <span>Harmony</span>
+                    <span>Purification</span>
+                    <span>Enlightenment</span>
+                    <span>Unity</span>
+                    <span>Transcendence</span>
+                    <span>Divine Will</span>
+                </div>
+            </div>
+            <div class="block">
+                <h4>The Hierarchy of Angels</h4>
+                <p>
+                    The celestial hierarchy is structured in nine choirs, each serving specific divine purposes:
+                    <br><br>
+                    • <strong>Seraphim</strong>: Closest to the divine source, burning with celestial fire
+                    <br>
+                    • <strong>Cherubim</strong>: Keepers of divine knowledge and cosmic secrets
+                    <br>
+                    • <strong>Thrones</strong>: Manifestations of divine justice and authority
+                    <br>
+                    • <strong>Dominions</strong>: Regulators of celestial energies and universal laws
+                    <br>
+                    • <strong>Virtues</strong>: Bearers of miracles and divine grace
+                    <br>
+                    • <strong>Powers</strong>: Guardians against chaos and demonic influence
+                    <br>
+                    • <strong>Principalities</strong>: Protectors of nations and divine principles
+                    <br>
+                    • <strong>Archangels</strong>: Messengers and warriors of celestial will
+                    <br>
+                    • <strong>Angels</strong>: Guides and guardians of mortal souls
+                </p>
+            </div>
+            <div class="block">
+                <h4>Roleplay Scenario</h4>
+                <div class="roleplay-scenario">
+                    <p>
+                        You awaken in a chamber of crystalline light, your memories of mortal life fading 
+                        like a distant dream. A being of pure radiance approaches—not with words, but with 
+                        understanding transmitted directly to your consciousness. You are offered a choice: 
+                        ascend to become part of the celestial chorus, or maintain your individuality while 
+                        serving the divine will.
+                    </p>
+                </div>
+            </div>
+            <div class="block">
+                <h4>Your Role</h4>
+                <p>
+                    You are a newly arrived soul, still bearing the faint echoes of your mortal existence. 
+                    Your journey is one of purification and understanding—to shed your earthly attachments 
+                    and embrace the eternal peace of celestial existence.
+                </p>
+                <div class="your-role">The Newly Awakened Soul</div>
+            </div>
+            <div class="hint">Click the cross to close the description</div>
+        </div>
+    </div>
+</div>
+
+<!-- Demon World Detail -->
+<div class="detail world-detail demon-detail" id="demon-world-detail">
+    <div class="close-btn">&times;</div>
+    <div class="detail-grid">
+        <img src="https://i.ibb.co/wdLqL7h/demon1.png" alt="Infernal Realm">
+        <div>
+            <h2>Infernal Descent</h2>
+            <div class="block">
+                <h4>The Infernal Dominion</h4>
+                <p>
+                    Infernal Descent is a realm forged from ambition, desire, and eternal conflict. 
+                    Unlike the orderly celestial planes, Hell is a fractured dominion where power is 
+                    the only currency and survival depends on strength, cunning, and will.
+                </p>
+                <p>
+                    The landscape shifts constantly—mountains of obsidian, rivers of molten ambition, 
+                    and citadels carved from the souls of the damned. Time here is measured in cycles 
+                    of conquest and rebellion, each moment an opportunity to rise or fall in the endless 
+                    hierarchy of damnation.
+                </p>
+            </div>
+            <div class="block">
+                <h4>Core Principles</h4>
+                <div class="traits">
+                    <span>Ambition</span>
+                    <span>Conflict</span>
+                    <span>Desire</span>
+                    <span>Power</span>
+                    <span>Corruption</span>
+                    <span>Freedom</span>
+                </div>
+            </div>
+            <div class="block">
+                <h4>The Hierarchy of Hell</h4>
+                <p>
+                    Hell's structure is fluid, constantly reshaped by power struggles:
+                    <br><br>
+                    • <strong>Archdemons</strong>: Rulers of the nine circles, embodiments of primal sins
+                    <br>
+                    • <strong>Greater Demons</strong>: Generals and lords commanding legions of the damned
+                    <br>
+                    • <strong>Lesser Demons</strong>: Specialists in corruption, temptation, and torment
+                    <br>
+                    • <strong>Imps</strong>: Minor servants and scouts, masters of deceit and trickery
+                    <br>
+                    • <strong>The Damned</strong>: Mortal souls reforged through suffering and ambition
+                    <br>
+                    • <strong>Abyssal Creatures</strong>: Beasts born from the raw chaos of the infernal plane
+                </p>
+            </div>
+            <div class="block">
+                <h4>Roleplay Scenario</h4>
+                <div class="roleplay-scenario">
+                    <p>
+                        You awaken in chains, your soul branded with the marks of your mortal sins. 
+                        Before you stands a demonic overseer, offering you a choice: eternal servitude 
+                        in the lowest pits, or a chance to climb the infernal hierarchy through strength 
+                        and cunning. The citadel of a weakened lord needs new soldiers, and ambition 
+                        is the only key to advancement.
+                    </p>
+                </div>
+            </div>
+            <div class="block">
+                <h4>Your Role</h4>
+                <p>
+                    You are freshly damned, your mortal life a fading memory eclipsed by the raw 
+                    reality of infernal existence. Your journey is one of survival and ambition—to 
+                    either become a pawn in another's game, or to seize power and forge your own 
+                    destiny in the fires of Hell.
+                </p>
+                <div class="your-role">The Newly Damned</div>
+            </div>
+            <div class="hint">Click the cross to close the description</div>
+        </div>
+    </div>
+</div>
 
 <!-- Seraph Detail -->
 <div class="detail angel-detail" id="seraph-detail">
@@ -844,6 +1345,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const overlay = document.getElementById('overlay');
     const closeButtons = document.querySelectorAll('.close-btn');
     const details = document.querySelectorAll('.detail');
+    const aboutButtons = document.querySelectorAll('.about-btn');
     
     // Открытие детального описания при клике на карточку
     cards.forEach(card => {
@@ -854,65 +1356,72 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-// Замените текущие функции openDetail и обработчики закрытия этим кодом:
-
-// Открытие детального описания с анимацией
-function openDetail(characterId) {
-    // Скрываем все описания
-    details.forEach(detail => {
-        detail.classList.remove('active');
-        detail.style.display = 'none';
+    // Открытие описания мира при клике на кнопку About
+    aboutButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const worldId = this.getAttribute('data-world');
+            openDetail(`${worldId}-world`);
+        });
     });
     
-    // Показываем нужное описание
-    const detailElement = document.getElementById(`${characterId}-detail`);
-    if (detailElement) {
-        // Показываем элемент без анимации
-        detailElement.style.display = 'block';
-        overlay.style.display = 'block';
-        document.body.style.overflow = 'hidden';
+    // Открытие детального описания с анимацией
+    function openDetail(characterId) {
+        // Скрываем все описания
+        details.forEach(detail => {
+            detail.classList.remove('active');
+            detail.style.display = 'none';
+        });
         
-        // Небольшая задержка для применения начальных стилей
-        setTimeout(() => {
-            detailElement.classList.add('active');
-            overlay.classList.add('active');
-        }, 10);
+        // Показываем нужное описание
+        const detailElement = document.getElementById(`${characterId}-detail`);
+        if (detailElement) {
+            // Показываем элемент без анимации
+            detailElement.style.display = 'block';
+            overlay.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+            
+            // Небольшая задержка для применения начальных стилей
+            setTimeout(() => {
+                detailElement.classList.add('active');
+                overlay.classList.add('active');
+            }, 10);
+        }
     }
-}
 
-// Закрытие детального описания с анимацией
-function closeAllDetails() {
-    // Запускаем анимацию исчезновения
-    details.forEach(detail => detail.classList.remove('active'));
-    overlay.classList.remove('active');
-    
-    // После завершения анимации скрываем элементы
-    setTimeout(() => {
-        details.forEach(detail => detail.style.display = 'none');
-        overlay.style.display = 'none';
-        document.body.style.overflow = 'auto';
-    }, 300); // Время должно совпадать с transition в CSS (0.9s = 900ms)
-}
+    // Закрытие детального описания с анимацией
+    function closeAllDetails() {
+        // Запускаем анимацию исчезновения
+        details.forEach(detail => detail.classList.remove('active'));
+        overlay.classList.remove('active');
+        
+        // После завершения анимации скрываем элементы
+        setTimeout(() => {
+            details.forEach(detail => detail.style.display = 'none');
+            overlay.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }, 300); // Время должно совпадать с transition в CSS (0.9s = 900ms)
+    }
 
-// Обновленные обработчики событий
-closeButtons.forEach(btn => {
-    btn.addEventListener('click', function(e) {
-        e.stopPropagation();
+    // Обновленные обработчики событий
+    closeButtons.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            closeAllDetails();
+        });
+    });
+
+    // Закрытие по клику на оверлей
+    overlay.addEventListener('click', function() {
         closeAllDetails();
     });
-});
 
-// Закрытие по клику на оверлей
-overlay.addEventListener('click', function() {
-    closeAllDetails();
-});
-
-// Закрытие по Escape
-document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-        closeAllDetails();
-    }
-});
+    // Закрытие по Escape
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeAllDetails();
+        }
+    });
     
     // GSAP анимации
     gsap.from('.world-title', {
@@ -936,10 +1445,20 @@ document.addEventListener('keydown', function(e) {
         duration: 0.8,
         stagger: 0.2
     });
+    
+    // Анимация для кнопок About
+    gsap.from('.about-btn', {
+        scrollTrigger: {
+            trigger: '.world',
+            start: 'top 85%',
+        },
+        y: 20,
+        opacity: 0,
+        duration: 1,
+        delay: 0.5,
+        ease: "power2.out"
+    });
 });
 </script>
 </body>
 </html>
-
-
-
