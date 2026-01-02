@@ -1,0 +1,466 @@
+:root {
+    /* Светлая тема (Ангелы) */
+    --angel-bg: #f8f5f0;
+    --angel-card: #ffffff;
+    --angel-text: #2c3e50;
+    --angel-accent: #d4af37;
+    --angel-light: #e8f4f8;
+    --angel-glow: rgba(212, 175, 55, 0.1);
+    
+    /* Темная тема (Демоны) */
+    --demon-bg: #0a0a0a;
+    --demon-card: #1a1a1a;
+    --demon-text: #f0f0f0;
+    --demon-accent: #c90a0a;
+    --demon-dark: #2a0a0a;
+    --demon-glow: rgba(201, 10, 10, 0.15);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition: background 0.5s ease, color 0.3s ease;
+}
+
+body {
+    font-family: 'Playfair Display', serif;
+    background: var(--angel-bg);
+    color: var(--angel-text);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+body.dark-theme {
+    background: var(--demon-bg);
+    color: var(--demon-text);
+}
+
+/* Переключатель тем */
+.theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.theme-checkbox {
+    display: none;
+}
+
+.theme-label {
+    display: flex;
+    align-items: center;
+    background: linear-gradient(90deg, var(--angel-accent) 0%, var(--demon-accent) 100%);
+    border-radius: 30px;
+    padding: 5px;
+    cursor: pointer;
+    width: 120px;
+    height: 50px;
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.theme-toggle-slider {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background: white;
+    border-radius: 50%;
+    left: 5px;
+    transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    z-index: 1;
+}
+
+.theme-checkbox:checked + .theme-label .theme-toggle-slider {
+    transform: translateX(70px);
+}
+
+.theme-icon {
+    flex: 1;
+    text-align: center;
+    z-index: 2;
+    font-size: 1.2rem;
+    color: white;
+}
+
+/* Герой-секция */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 30% 50%, var(--angel-glow) 0%, transparent 70%);
+    z-index: -1;
+}
+
+.dark-theme .hero::before {
+    background: radial-gradient(circle at 70% 50%, var(--demon-glow) 0%, transparent 70%);
+}
+
+.hero-title-container {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    margin-bottom: 30px;
+}
+
+.title-angel, .title-demon {
+    font-size: 4rem;
+    line-height: 1.1;
+    text-shadow: 3px 3px 10px rgba(0,0,0,0.1);
+}
+
+.title-angel {
+    color: var(--angel-text);
+    font-family: 'Playfair Display', serif;
+}
+
+.title-demon {
+    color: var(--demon-accent);
+    font-family: 'UnifrakturMaguntia', cursive;
+    letter-spacing: 2px;
+}
+
+.dark-theme .title-demon {
+    color: var(--demon-text);
+}
+
+.dark-theme .title-angel {
+    color: var(--angel-accent);
+}
+
+.vs-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.vs-line {
+    width: 2px;
+    height: 60px;
+    background: linear-gradient(to bottom, transparent, var(--angel-accent), transparent);
+}
+
+.dark-theme .vs-line {
+    background: linear-gradient(to bottom, transparent, var(--demon-accent), transparent);
+}
+
+.vs-text {
+    font-family: 'UnifrakturMaguntia', cursive;
+    font-size: 1.8rem;
+    color: var(--angel-accent);
+}
+
+.dark-theme .vs-text {
+    color: var(--demon-accent);
+}
+
+.hero-subtitle {
+    font-size: 1.3rem;
+    max-width: 700px;
+    margin-bottom: 40px;
+    opacity: 0.9;
+}
+
+.scroll-button {
+    color: var(--angel-accent);
+    border: 2px solid var(--angel-accent);
+    padding: 15px 25px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    text-decoration: none;
+    animation: float 3s ease-in-out infinite;
+}
+
+.dark-theme .scroll-button {
+    color: var(--demon-accent);
+    border-color: var(--demon-accent);
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* Секции команд */
+.team-section {
+    padding: 100px 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.team-section h2 {
+    text-align: center;
+    font-size: 3rem;
+    margin-bottom: 60px;
+    position: relative;
+    display: inline-block;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.angel-side h2 {
+    color: var(--angel-text);
+    font-family: 'Playfair Display', serif;
+}
+
+.demon-side h2 {
+    color: var(--demon-accent);
+    font-family: 'UnifrakturMaguntia', cursive;
+    letter-spacing: 3px;
+}
+
+.dark-theme .angel-side h2 {
+    color: var(--angel-accent);
+}
+
+.dark-theme .demon-side h2 {
+    color: var(--demon-text);
+}
+
+/* Сетка карточек */
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 40px;
+    margin-top: 40px;
+}
+
+/* Карточки */
+.player-card {
+    border-radius: 15px;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    cursor: pointer;
+    height: 480px;
+}
+
+.angel-card {
+    background: var(--angel-card);
+    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.1);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+.demon-card {
+    background: var(--demon-card);
+    box-shadow: 0 10px 30px rgba(201, 10, 10, 0.1);
+    border: 1px solid rgba(201, 10, 10, 0.3);
+}
+
+.player-card:hover {
+    transform: translateY(-15px);
+}
+
+.angel-card:hover {
+    box-shadow: 0 20px 40px rgba(212, 175, 55, 0.25);
+}
+
+.demon-card:hover {
+    box-shadow: 0 20px 40px rgba(201, 10, 10, 0.3);
+}
+
+.player-number {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 3rem;
+    font-weight: bold;
+    z-index: 2;
+    opacity: 0.15;
+}
+
+.angel-card .player-number {
+    color: var(--angel-text);
+}
+
+.demon-card .player-number {
+    color: var(--demon-text);
+    font-family: 'UnifrakturMaguntia', cursive;
+}
+
+.player-image {
+    width: 100%;
+    height: 250px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.angel-image {
+    background-image: url('https://images.unsplash.com/photo-1534447677768-be436bb09401?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80');
+}
+
+.demon-image {
+    background-image: url('https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80');
+}
+
+.player-image::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.angel-image::after {
+    background: linear-gradient(to bottom, transparent 50%, var(--angel-card) 100%);
+}
+
+.demon-image::after {
+    background: linear-gradient(to bottom, transparent 50%, var(--demon-card) 100%);
+}
+
+.player-info {
+    padding: 25px;
+    position: relative;
+}
+
+.player-info h3 {
+    font-size: 1.8rem;
+    margin-bottom: 5px;
+}
+
+.angel-card h3 {
+    color: var(--angel-text);
+    font-family: 'Playfair Display', serif;
+}
+
+.demon-card h3 {
+    color: var(--demon-accent);
+    font-family: 'UnifrakturMaguntia', cursive;
+    letter-spacing: 1px;
+}
+
+.dark-theme .demon-card h3 {
+    color: var(--demon-text);
+}
+
+.player-title {
+    color: var(--angel-accent);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+}
+
+.demon-card .player-title {
+    color: #ff5555;
+}
+
+.player-nickname {
+    color: var(--angel-text);
+    opacity: 0.9;
+    margin-bottom: 15px;
+    font-size: 0.95rem;
+}
+
+.demon-card .player-nickname {
+    color: #ff9999;
+}
+
+.player-desc {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+.player-status {
+    display: inline-block;
+    padding: 6px 15px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.status-angel {
+    background: rgba(212, 175, 55, 0.15);
+    color: var(--angel-accent);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+}
+
+.status-demon {
+    background: rgba(201, 10, 10, 0.15);
+    color: #ff5555;
+    border: 1px solid rgba(201, 10, 10, 0.3);
+}
+
+/* Декоративные элементы */
+.player-card::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    border-radius: 15px;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.4s;
+}
+
+.angel-card::before {
+    background: radial-gradient(circle at center, var(--angel-glow) 0%, transparent 70%);
+}
+
+.demon-card::before {
+    background: radial-gradient(circle at center, var(--demon-glow) 0%, transparent 70%);
+}
+
+.player-card:hover::before {
+    opacity: 1;
+}
+
+/* Адаптивность */
+@media (max-width: 1100px) {
+    .hero-title-container {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .vs-container {
+        flex-direction: row;
+        gap: 20px;
+    }
+    
+    .vs-line {
+        width: 60px;
+        height: 2px;
+    }
+    
+    .title-angel, .title-demon {
+        font-size: 3rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .theme-label {
+        width: 100px;
+        height: 40px;
+    }
+    
+    .theme-checkbox:checked + .theme-label .theme-toggle-slider {
+        transform: translateX(55px);
+    }
+    
+    .team-grid {
+        grid-template-columns: 1fr;
+    }
+}
