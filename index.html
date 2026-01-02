@@ -56,21 +56,199 @@ nav a:hover { opacity:0.6; }
 
 /* CARDS */
 .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 30px; width: 100%; perspective: 1200px; }
-.card { width:100%; height:380px; position:relative; }
-.card-inner { width:100%; height:100%; transition: transform 0.8s; transform-style: preserve-3d; cursor: pointer; position: relative; }
+.card { width:100%; height:380px; position:relative; cursor: pointer; z-index: 1; }
+.card-inner { width:100%; height:100%; transition: transform 0.8s; transform-style: preserve-3d; position: relative; }
 .card:hover .card-inner { transform: rotateY(180deg); }
 .card-front, .card-back { position: absolute; width:100%; height:100%; backface-visibility: hidden; border-radius:12px; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:15px; box-shadow:0 4px 15px rgba(0,0,0,0.3); }
 .card-front { background: rgba(10,10,10,0.6); }
-.card-back { background: rgba(0,0,0,0.85); transform: rotateY(180deg); display:flex; align-items:center; justify-content:center; padding:20px; text-align:center; border:1px solid var(--border-soft); font-size:1rem; }
+.card-back { background: rgba(0,0,0,0.85); transform: rotateY(180deg); display:flex; flex-direction:column; align-items:center; justify-content:center; padding:20px; text-align:center; border:1px solid var(--border-soft); font-size:1rem; }
 .card-img { width:100%; max-width:180px; height:240px; border-radius:10px; overflow:hidden; margin-bottom:12px; background: rgba(0,0,0,0.2); }
 .card-img img { width:100%; height:100%; object-fit:cover; display:block; }
-.card-back .tags { margin-top: 12px; display:flex; flex-wrap:wrap; justify-content:center; gap:8px; }
-.card-back .tags span { background: rgba(255,255,255,0.1); color:#fff; padding:3px 8px; font-size:0.75rem; border-radius:6px; text-transform:uppercase; letter-spacing:0.5px; }
+
+/* Tags */
+.tags { margin-top: 12px; display:flex; flex-wrap:wrap; justify-content:center; gap:8px; }
+.tags span { background: rgba(255,255,255,0.1); color:#fff; padding:3px 8px; font-size:0.75rem; border-radius:6px; text-transform:uppercase; letter-spacing:0.5px; }
+
+/* Детальное описание */
+.detail {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.9);
+    width: 90%;
+    max-width: 900px;
+    max-height: 85vh;
+    overflow-y: auto;
+    background: rgba(8,8,8,0.95);
+    border-radius: 22px;
+    border: 1px solid var(--border-soft);
+    z-index: 2001;
+    display: none;
+    opacity: 0;
+    transition: all 0.9s ease;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.7);
+}
+
+.detail.active {
+    display: block;
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* Кнопка закрытия */
+.close-btn {
+    position: absolute;
+    top: 20px;
+    right: 22px;
+    width: 30px;
+    height: 30px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.4rem;
+    color: #aaa;
+    transition: color 0.3s, transform 0.3s;
+    z-index: 10;
+}
+.close-btn:hover {
+    color: #fff;
+    transform: rotate(90deg);
+}
+
+/* Сетка детального описания */
+.detail-grid {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 44px;
+    padding: 46px;
+}
+
+.detail-grid img {
+    width: 100%;
+    border-radius: 16px;
+    box-shadow: 0 0 30px rgba(0,0,0,0.6);
+}
+
+/* Текстовые блоки в деталях */
+.detail h2 {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+.angel-detail h2 { color: var(--angel-accent); }
+.demon-detail h2 { color: var(--demon-accent); }
+
+.block {
+    margin-bottom: 32px;
+}
+.block h4 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+}
+.block p {
+    font-size: 0.98rem;
+    line-height: 1.65;
+    color: #ddd;
+}
+
+/* Черты характера */
+.traits {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+.traits span {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    padding: 7px 14px;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 10px;
+    background: rgba(255,255,255,0.02);
+}
+
+/* Сценарий ролевой игры */
+.roleplay-scenario {
+    background: rgba(255,255,255,0.02);
+    border-left: 3px solid;
+    padding: 15px;
+    margin: 15px 0;
+}
+.angel-detail .roleplay-scenario { 
+    border-left-color: var(--angel-accent);
+    background: rgba(200,220,255,0.05);
+}
+.demon-detail .roleplay-scenario { 
+    border-left-color: var(--demon-accent);
+    background: rgba(255,100,100,0.05);
+}
+
+/* Ваша роль */
+.your-role {
+    display: inline-block;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-top: 10px;
+}
+.angel-detail .your-role { 
+    background: rgba(200,220,255,0.2); 
+    color: var(--angel-accent);
+}
+.demon-detail .your-role { 
+    background: rgba(255,100,100,0.2); 
+    color: var(--demon-accent);
+}
+
+/* Подсказка */
+.hint {
+    margin-top: 18px;
+    font-size: 0.75rem;
+    color: #777;
+    font-family: 'Space Grotesk', sans-serif;
+    letter-spacing: 0.15em;
+}
+
+/* Оверлей для модального окна */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.85);
+    z-index: 2000;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.9s ease;
+    backdrop-filter: blur(5px);
+}
+.overlay.active {
+    display: block;
+    opacity: 1;
+}
 
 /* ANIMATIONS */
 @keyframes fadeUp { 0% { opacity:0; transform:translateY(30px);} 100% { opacity:1; transform:translateY(0); } }
 @keyframes floatParticle { 0% { transform:translateY(0) scale(0.5); opacity:0;} 50% {opacity:1;} 100%{transform:translateY(-200px) scale(1); opacity:0;} }
 @keyframes fireParticle { 0% { transform:translateY(0) scale(0.5) rotate(0deg); opacity:0;} 50%{opacity:1;} 100%{transform:translateY(-150px) scale(1) rotate(360deg); opacity:0;} }
+@keyframes rotateSlow {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+}
+
+@keyframes rotateReverse {
+    from { transform: rotate(45deg); }
+    to   { transform: rotate(-315deg); }
+}
+
 
 /* ANGELS */
 .angels { 
@@ -88,8 +266,6 @@ nav a:hover { opacity:0.6; }
   background: radial-gradient(circle at center, rgba(50,0,0,0.6), rgba(0,0,0,0.9)); 
   box-shadow: inset 0 0 80px rgba(255,60,60,0.2);
 }
-.demons .card-inner { transition: transform 0.8s; transform-style: preserve-3d; cursor: pointer; } /* Вращение восстановлено */
-.demons .card:hover .card-inner { transform: rotateY(180deg); }
 .demons .world-title { color: var(--demon-accent); font-family:'Rubik Glitch', cursive; text-shadow: 0 0 15px rgba(255,80,80,0.7); }
 .demons .world-title::after { background: rgba(255,75,75,0.7); }
 .demons .world-desc { border:2px solid rgba(255,75,75,0.7); box-shadow:0 0 25px rgba(255,60,60,0.25); background: rgba(255,50,50,0.05); text-shadow:0 0 10px rgba(255,50,50,0.5); font-family:'Space Grotesk', sans-serif; }
@@ -98,6 +274,148 @@ nav a:hover { opacity:0.6; }
 
 /* FOOTER */
 footer { text-align:center; padding:30px; font-size:0.85rem; color:#777; border-top:1px solid var(--border-soft); }
+
+/* =============================== */
+/* CARD FRAMES & GLYPHS DECORATION */
+/* =============================== */
+
+/* Общая база для декора карточек */
+.card {
+    position: relative;
+    z-index: 1;
+}
+
+/* ---------- ANGELS CARDS ---------- */
+
+.angels .card::before {
+    content: "";
+    position: absolute;
+    inset: -6px;
+    border-radius: 16px;
+    background:
+      linear-gradient(135deg,
+        rgba(220,240,255,0.6),
+        rgba(160,200,255,0.2),
+        rgba(220,240,255,0.6));
+    z-index: -1;
+    filter: blur(2px);
+    opacity: 1; /* Изменено с 0 на 1 */
+    transition: opacity 0.8s, filter 0.8s; /* Добавлен transition для filter */
+}
+
+.angels .card:hover::before {
+    opacity: 1;
+    filter: blur(4px); /* Усиливаем размытие при наведении */
+}
+
+.angels .card::after {
+    content: "✧ ✦ ✧ ✦ ✧";
+    position: absolute;
+    bottom: -22px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 0.75rem;
+    letter-spacing: 6px;
+    color: rgba(200,225,255,0.6);
+    opacity: 1; /* Изменено с 0 на 1 */
+    transition: opacity 0.8s, letter-spacing 0.8s;
+}
+
+.angels .card:hover::after {
+    opacity: 1;
+    letter-spacing: 8px; /* Увеличиваем межбуквенное расстояние при наведении */
+}
+
+/* Вращающиеся глифы вокруг карточки ангелов */
+.angels .card-inner::before {
+    content: "";
+    position: absolute;
+    inset: -18px;
+    border-radius: 50%;
+    border: 1px dashed rgba(200,225,255,0.35);
+    animation: rotateSlow 40s linear infinite;
+    animation-play-state: paused;
+    pointer-events: none;
+}
+
+
+.angels .card:hover .card-inner::before {
+    opacity: 1;
+    transform: rotate(360deg);
+}
+
+/* ---------- DEMONS CARDS ---------- */
+
+/* Адские вращающиеся кольца */
+.demons .card::before {
+    content: "";
+    position: absolute;
+    inset: -6px;
+    border-radius: 14px;
+    background:
+      linear-gradient(135deg,
+        rgba(120,0,0,0.6),
+        rgba(40,0,0,0.8),
+        rgba(120,0,0,0.6));
+    z-index: -1;
+    box-shadow:
+      inset 0 0 20px rgba(255,60,60,0.4),
+      0 0 25px rgba(255,60,60,0.25);
+      transition: filter 0.8s ease, opacity 0.8s ease;
+}
+
+.demons .card::after {
+    content: "⛧ ⛧ ⛧";
+    position: absolute;
+    top: -22px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 10px;
+    color: rgba(255,60,60,0.7);
+    animation: demonGlyphPulse 2.5s ease-in-out infinite;
+}
+
+/* Адские вращающиеся кольца */
+.demons .card-inner::before {
+    content: "";
+    position: absolute;
+    inset: -20px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,60,60,0.4);
+    transform: rotate(45deg);
+    animation: rotateReverse 22s linear infinite;
+    animation-play-state: paused;
+    pointer-events: none;
+}
+
+.demons .card:hover .card-inner::before {
+    opacity: 1;
+    letter-spacing: 8px; /* Увеличиваем межбуквенное расстояние при наведении */
+}
+
+.demons .card:hover::before {
+    filter: blur(4px);
+  box-shadow:
+      inset 0 0 30px rgba(255,60,60,0.6),
+      0 0 35px rgba(255,60,60,0.4);
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .detail-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        padding: 30px;
+    }
+    
+    .detail-grid img {
+        max-width: 250px;
+        margin: 0 auto;
+    }
+}
 </style>
 </head>
 <body>
@@ -132,33 +450,62 @@ footer { text-align:center; padding:30px; font-size:0.85rem; color:#777; border-
     <div class="world-desc">A transcendent realm of harmony and radiant silence. Souls are refined beyond mortal weakness.</div>
 
     <div class="cards">
-      <div class="card">
-        <div class="card-inner">
-          <div class="card-front">
-            <div class="card-img"><img src="https://i.ibb.co/7ypZjZK/angel1.png" alt="Seraph"></div>
-            <h3>Seraph</h3>
-          </div>
-          <div class="card-back"><p>Celestial flame incarnate.</p></div>
+        <!-- Seraph Card -->
+        <div class="card" data-character="seraph">
+            <div class="card-inner">
+                <div class="card-front">
+                    <div class="card-img"><img src="https://i.ibb.co/7ypZjZK/angel1.png" alt="Seraph"></div>
+                    <h3>Seraph</h3>
+                </div>
+                <div class="card-back">
+                    <p>Celestial flame incarnate. The closest beings to the divine source.</p>
+                    <div class="tags">
+                        <span>Celestial</span>
+                        <span>Flame</span>
+                        <span>Purifier</span>
+                        <span>Divine</span>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="card">
-        <div class="card-inner">
-          <div class="card-front">
-            <div class="card-img"><img src="https://i.ibb.co/4K1mCSt/angel2.png" alt="Archon"></div>
-            <h3>Archon</h3>
-          </div>
-          <div class="card-back"><p>Executor of divine will.</p></div>
+        
+        <!-- Archon Card -->
+        <div class="card" data-character="archon">
+            <div class="card-inner">
+                <div class="card-front">
+                    <div class="card-img"><img src="https://i.ibb.co/4K1mCSt/angel2.png" alt="Archon"></div>
+                    <h3>Archon</h3>
+                </div>
+                <div class="card-back">
+                    <p>Administrator of cosmic balance and keeper of order.</p>
+                    <div class="tags">
+                        <span>Governor</span>
+                        <span>Order</span>
+                        <span>Law</span>
+                        <span>Balance</span>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="card">
-        <div class="card-inner">
-          <div class="card-front">
-            <div class="card-img"><img src="https://i.ibb.co/9wT7Rks/angel3.png" alt="Virtue"></div>
-            <h3>Virtue</h3>
-          </div>
-          <div class="card-back"><p>Manifestation of hope.</p></div>
+        
+        <!-- Virtue Card -->
+        <div class="card" data-character="virtue">
+            <div class="card-inner">
+                <div class="card-front">
+                    <div class="card-img"><img src="https://i.ibb.co/9wT7Rks/angel3.png" alt="Virtue"></div>
+                    <h3>Virtue</h3>
+                </div>
+                <div class="card-back">
+                    <p>Channeler of celestial energy to enact heaven's will.</p>
+                    <div class="tags">
+                        <span>Hope</span>
+                        <span>Miracle</span>
+                        <span>Grace</span>
+                        <span>Divine</span>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
 
     <!-- Angel Particles -->
@@ -175,51 +522,82 @@ footer { text-align:center; padding:30px; font-size:0.85rem; color:#777; border-
     <div class="world-desc">A fractured dominion of hunger and ambition. Souls are reforged through conflict.</div>
 
     <div class="cards">
-      <div class="card">
-        <div class="card-inner">
-          <div class="card-front">
-            <div class="card-img"><img src="images/1.jpg" alt="Unnamed Bot"></div>
-            <h3>Unnamed Bot</h3>
-          </div>
-          <div class="card-back">
-            <p>He struggles to understand and express his emotions, and it isn’t something he can figure out on his own.<br>But he has you — his closest friend.</p>
-            <div class="tags">
-              <span>Male</span>
-              <span>AnyPOV</span>
-              <span>Angst</span>
-              <span>Fluff</span>
-              <span>Switch</span>
+        <!-- Unnamed Bot Card -->
+        <div class="card" data-character="unnamed-bot">
+            <div class="card-inner">
+                <div class="card-front">
+                    <div class="card-img"><img src="images/1.jpg" alt="Noah"></div>
+                    <h3>Noah</h3>
+                </div>
+                <div class="card-back">
+                    <p>He struggles to understand and express his emotions, and it isn't something he can figure out on his own.<br>But he has you — his closest friend.</p>
+                    <div class="tags">
+                        <span>Male</span>
+                        <span>AnyPOV</span>
+                        <span>Angst</span>
+                        <span>Fluff</span>
+                        <span>Switch</span>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
-      <div class="card">
-        <div class="card-inner">
-          <div class="card-front">
-            <div class="card-img"><img src="https://i.ibb.co/wdLqL7h/demon1.png" alt="Imp Lord"></div>
-            <h3>Imp Lord</h3>
-          </div>
-          <div class="card-back"><p>Architect of deceit.</p></div>
+        
+        <!-- Imp Lord Card -->
+        <div class="card" data-character="imp-lord">
+            <div class="card-inner">
+                <div class="card-front">
+                    <div class="card-img"><img src="https://i.ibb.co/wdLqL7h/demon1.png" alt="Imp Lord"></div>
+                    <h3>Imp Lord</h3>
+                </div>
+                <div class="card-back">
+                    <p>A cunning strategist in the eternal war between heaven and hell.</p>
+                    <div class="tags">
+                        <span>Deceit</span>
+                        <span>Strategy</span>
+                        <span>Commander</span>
+                        <span>Cunning</span>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="card">
-        <div class="card-inner">
-          <div class="card-front">
-            <div class="card-img"><img src="https://i.ibb.co/7jTs2Gn/demon2.png" alt="Abyss Knight"></div>
-            <h3>Abyss Knight</h3>
-          </div>
-          <div class="card-back"><p>Forged in endless war.</p></div>
+        
+        <!-- Abyss Knight Card -->
+        <div class="card" data-character="abyss-knight">
+            <div class="card-inner">
+                <div class="card-front">
+                    <div class="card-img"><img src="https://i.ibb.co/7jTs2Gn/demon2.png" alt="Abyss Knight"></div>
+                    <h3>Abyss Knight</h3>
+                </div>
+                <div class="card-back">
+                    <p>Guardian of hell's deepest secrets and most forbidden knowledge.</p>
+                    <div class="tags">
+                        <span>Warrior</span>
+                        <span>Guardian</span>
+                        <span>Secret</span>
+                        <span>Forbidden</span>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="card">
-        <div class="card-inner">
-          <div class="card-front">
-            <div class="card-img"><img src="https://i.ibb.co/6rfxw6C/demon3.png" alt="Succubus"></div>
-            <h3>Succubus</h3>
-          </div>
-          <div class="card-back"><p>Devourer of will.</p></div>
+        
+        <!-- Succubus Card -->
+        <div class="card" data-character="succubus">
+            <div class="card-inner">
+                <div class="card-front">
+                    <div class="card-img"><img src="https://i.ibb.co/6rfxw6C/demon3.png" alt="Succubus"></div>
+                    <h3>Succubus</h3>
+                </div>
+                <div class="card-back">
+                    <p>She feeds on mortal passion and corrupts even the purest hearts.</p>
+                    <div class="tags">
+                        <span>Temptress</span>
+                        <span>Passion</span>
+                        <span>Corruption</span>
+                        <span>Desire</span>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
 
     <!-- Demon Particles -->
@@ -230,5 +608,495 @@ footer { text-align:center; padding:30px; font-size:0.85rem; color:#777; border-
 </section>
 
 <footer>Afterlife Destinations — refined narrative template</footer>
+
+<!-- Детальные описания (скрыты по умолчанию) -->
+<div class="overlay" id="overlay"></div>
+
+<!-- Seraph Detail -->
+<div class="detail angel-detail" id="seraph-detail">
+    <div class="close-btn">&times;</div>
+    <div class="detail-grid">
+        <img src="https://i.ibb.co/7ypZjZK/angel1.png">
+        <div>
+            <h2>Seraph</h2>
+            <div class="block">
+                <h4>Biography & Personality</h4>
+                <p>
+                    Seraph was created long before mortals learned to name light and darkness.
+                    Its existence is not guided by emotion, but by absolute intent.
+                    A living embodiment of divine law, Seraph stands above judgment and mercy alike.
+                    <br><br>
+                    Yet within this perfect obedience lies a fracture —
+                    a growing awareness that divine will and the value of a single soul
+                    may not always align.
+                </p>
+            </div>
+            <div class="block">
+                <h4>Personality Traits</h4>
+                <div class="traits">
+                    <span>Absolute discipline</span>
+                    <span>Emotional restraint</span>
+                    <span>Unshakable faith</span>
+                    <span>Suppressed inner conflict</span>
+                    <span>Sacral superiority</span>
+                </div>
+            </div>
+            <div class="block">
+                <h4>Roleplay Scenario</h4>
+                <p>
+                    The worlds approach a point of convergence.
+                    Seraph is commanded to erase the source of the anomaly —
+                    a being capable of altering what was meant to be inevitable.
+                    When it finally finds you, one truth becomes clear:
+                    you are neither enemy nor innocent.
+                </p>
+            </div>
+            <div class="block">
+                <h4>Your Role</h4>
+                <p>
+                    You are the catalyst.
+                    A mortal whose existence challenges the very concept of divine order.
+                    Your task is not to fight Seraph,
+                    but to make it question whether obedience without understanding
+                    can truly be called righteousness.
+                </p>
+                <div class="your-role">The Catalyst</div>
+            </div>
+            <div class="hint">Click the cross to close the description</div>
+        </div>
+    </div>
+</div>
+
+<!-- Archon Detail -->
+<div class="detail angel-detail" id="archon-detail">
+    <div class="close-btn">&times;</div>
+    <div class="detail-grid">
+        <img src="https://i.ibb.co/4K1mCSt/angel2.png">
+        <div>
+            <h2>Archon</h2>
+            <div class="block">
+                <h4>Biography & Personality</h4>
+                <p>
+                    Archon is the celestial bureaucrat, the keeper of cosmic records,
+                    and the enforcer of divine law. Created to maintain balance across realms,
+                    it sees the universe as a complex equation that must always remain balanced.
+                    <br><br>
+                    Its personality is defined by precision, order, and an unwavering
+                    commitment to the celestial hierarchy. Emotions are irrelevant variables
+                    in the grand equation of existence.
+                </p>
+            </div>
+            <div class="block">
+                <h4>Personality Traits</h4>
+                <div class="traits">
+                    <span>Precise</span>
+                    <span>Orderly</span>
+                    <span>Impartial</span>
+                    <span>Systematic</span>
+                    <span>Unemotional</span>
+                </div>
+            </div>
+            <div class="block">
+                <h4>Roleplay Scenario</h4>
+                <p>
+                    A cosmic anomaly has appeared in your sector of reality.
+                    Archon arrives not as a savior or destroyer, but as an auditor.
+                    It must determine whether the anomaly represents a threat to cosmic balance
+                    or is merely an acceptable deviation from established patterns.
+                </p>
+            </div>
+            <div class="block">
+                <h4>Your Role</h4>
+                <p>
+                    You are either the cause of the anomaly or its first witness.
+                    Archon will question you, examine your memories, and test your
+                    understanding of reality. Your challenge is to convince it that
+                    some deviations are necessary for growth.
+                </p>
+                <div class="your-role">Subject of Inquiry</div>
+            </div>
+            <div class="hint">Click the cross to close the description</div>
+        </div>
+    </div>
+</div>
+
+<!-- Virtue Detail -->
+<div class="detail angel-detail" id="virtue-detail">
+    <div class="close-btn">&times;</div>
+    <div class="detail-grid">
+        <img src="https://i.ibb.co/9wT7Rks/angel3.png">
+        <div>
+            <h2>Virtue</h2>
+            <div class="block">
+                <h4>Biography & Personality</h4>
+                <p>
+                    Virtue is hope made manifest, grace given form. Unlike other angels
+                    who enforce or administer, Virtue exists to inspire and uplift.
+                    It appears during moments of profound despair, offering not solutions
+                    but the strength to endure.
+                    <br><br>
+                    Its presence is gentle yet powerful, like sunlight breaking through
+                    storm clouds. It believes in redemption, transformation, and the
+                    inherent worth of every soul.
+                </p>
+            </div>
+            <div class="block">
+                <h4>Personality Traits</h4>
+                <div class="traits">
+                    <span>Hopeful</span>
+                    <span>Graceful</span>
+                    <span>Inspirational</span>
+                    <span>Compassionate</span>
+                    <span>Transformative</span>
+                </div>
+            </div>
+            <div class="block">
+                <h4>Roleplay Scenario</h4>
+                <p>
+                    In your darkest moment, when all seems lost and hope is but a memory,
+                    Virtue appears. It doesn't offer to fix your problems or fight your battles.
+                    Instead, it offers you a choice: to see the beauty in broken things,
+                    to find strength in vulnerability, to continue when continuing seems impossible.
+                </p>
+            </div>
+            <div class="block">
+                <h4>Your Role</h4>
+                <p>
+                    You are at a breaking point. Virtue has come to you not as a rescuer
+                    but as a mirror, reflecting back the strength you didn't know you possessed.
+                    Your task is to accept that sometimes salvation isn't about being saved,
+                    but about realizing you never needed saving in the first place.
+                </p>
+                <div class="your-role">The Broken Mirror</div>
+            </div>
+            <div class="hint">Click the cross to close the description</div>
+        </div>
+    </div>
+</div>
+
+<!-- Unnamed Bot Detail -->
+<div class="detail demon-detail" id="unnamed-bot-detail">
+    <div class="close-btn">&times;</div>
+    <div class="detail-grid">
+        <img src="images/1.jpg" alt="Noah">
+        <div>
+            <h2>Noah</h2>
+            <div class="block">
+                <h4>Biography & Personality</h4>
+                <p>
+                    Unnamed Bot is a demon who has forgotten everything: his name,
+                    his purpose, even the reason for his damnation. He wanders the
+                    lower circles of Hell like a ghost, observing emotions in others
+                    that he can barely remember feeling himself.
+                    <br><br>
+                    Despite his infernal nature, there's an innocence about him,
+                    a vulnerability that sets him apart from other demons. He doesn't
+                    understand cruelty or malice—only confusion and a deep, aching loneliness.
+                </p>
+            </div>
+            <div class="block">
+                <h4>Personality Traits</h4>
+                <div class="traits">
+                    <span>Confused</span>
+                    <span>Vulnerable</span>
+                    <span>Curious</span>
+                    <span>Lonely</span>
+                    <span>Innocent</span>
+                </div>
+            </div>
+            <div class="block">
+                <h4>Roleplay Scenario</h4>
+                <p>
+                    You encounter Unnamed Bot in a quiet corner of Hell. He approaches you
+                    hesitantly, his eyes filled with questions he doesn't know how to ask.
+                    He's heard other demons speak of emotions—love, anger, joy, sorrow—
+                    but these are just words to him. He wants you to teach him what they mean.
+                </p>
+            </div>
+            <div class="block">
+                <h4>Your Role</h4>
+                <p>
+                    You are his emotional guide. Your task is to help him understand
+                    feelings he's never experienced, to give names to the emptiness inside him.
+                    But be careful: teaching a demon about emotions is dangerous.
+                    What if he learns to feel—and what he feels is pain?
+                </p>
+                <div class="your-role">Emotional Guide</div>
+            </div>
+            <div class="hint">Click the cross to close the description</div>
+        </div>
+    </div>
+</div>
+
+<!-- Imp Lord Detail -->
+<div class="detail demon-detail" id="imp-lord-detail">
+    <div class="close-btn">&times;</div>
+    <div class="detail-grid">
+        <img src="https://i.ibb.co/wdLqL7h/demon1.png">
+        <div>
+            <h2>Imp Lord</h2>
+            <div class="block">
+                <h4>Biography & Personality</h4>
+                <p>
+                    The Imp Lord didn't rise to power through strength or brute force,
+                    but through cunning, manipulation, and psychological warfare.
+                    He commands legions of lesser demons not because they fear him,
+                    but because he understands them better than they understand themselves.
+                    <br><br>
+                    He specializes in corruption—not of bodies, but of ideals.
+                    He takes particular pleasure in turning virtues into vices,
+                    in making heroes question their own morality until they become
+                    the very monsters they swore to destroy.
+                </p>
+            </div>
+            <div class="block">
+                <h4>Personality Traits</h4>
+                <div class="traits">
+                    <span>Cunning</span>
+                    <span>Manipulative</span>
+                    <span>Patient</span>
+                    <span>Strategic</span>
+                    <span>Corruptive</span>
+                </div>
+            </div>
+            <div class="block">
+                <h4>Roleplay Scenario</h4>
+                <p>
+                    The Imp Lord has identified you as the linchpin in a resistance movement.
+                    Instead of destroying you, he offers a deal: serve as his agent in the
+                    mortal world, corrupting from within. He doesn't threaten you with pain
+                    or death—he threatens to systematically destroy everything you love,
+                    everyone you care about, until you have nothing left but him.
+                </p>
+            </div>
+            <div class="block">
+                <h4>Your Role</h4>
+                <p>
+                    You are the target of corruption. The Imp Lord will test your convictions,
+                    exploit your weaknesses, and twist your virtues until you're not sure
+                    what's right anymore. Your challenge is to hold onto your morality
+                    while convincing him you've embraced corruption.
+                </p>
+                <div class="your-role">Target of Corruption</div>
+            </div>
+            <div class="hint">Click the cross to close the description</div>
+        </div>
+    </div>
+</div>
+
+<!-- Abyss Knight Detail -->
+<div class="detail demon-detail" id="abyss-knight-detail">
+    <div class="close-btn">&times;</div>
+    <div class="detail-grid">
+        <img src="https://i.ibb.co/7jTs2Gn/demon2.png">
+        <div>
+            <h2>Abyss Knight</h2>
+            <div class="block">
+                <h4>Biography & Personality</h4>
+                <p>
+                    Forged in the deepest fires of Hell and tempered in endless battle,
+                    the Abyss Knight is a warrior without equal. He guards forbidden knowledge
+                    and ancient secrets, challenging any who would seek them to combat.
+                    <br><br>
+                    His honor, though twisted by infernal standards, is absolute.
+                    He follows a strict code of conduct: he never attacks first,
+                    he never breaks his word, and he never yields. To defeat him
+                    is to earn his respect—and the secrets he guards.
+                </p>
+            </div>
+            <div class="block">
+                <h4>Personality Traits</h4>
+                <div class="traits">
+                    <span>Honorable</span>
+                    <span>Disciplined</span>
+                    <span>Resolute</span>
+                    <span>Powerful</span>
+                    <span>Guardian</span>
+                </div>
+            </div>
+            <div class="block">
+                <h4>Roleplay Scenario</h4>
+                <p>
+                    You seek forbidden knowledge that could save your world,
+                    but it is guarded by the Abyss Knight. He offers you a chance:
+                    defeat him in single combat, and the knowledge is yours.
+                    Lose, and your soul joins his eternal vigil.
+                    <br><br>
+                    The battle won't be one of strength against strength—
+                    it will be a test of will, strategy, and conviction.
+                </p>
+            </div>
+            <div class="block">
+                <h4>Your Role</h4>
+                <p>
+                    You are the challenger. Your task is not just to defeat the Abyss Knight,
+                    but to prove that your cause is worth the risk. He will test your
+                    resolve, your skill, and your willingness to sacrifice everything
+                    for what you believe in.
+                </p>
+                <div class="your-role">The Challenger</div>
+            </div>
+            <div class="hint">Click the cross to close the description</div>
+        </div>
+    </div>
+</div>
+
+<!-- Succubus Detail -->
+<div class="detail demon-detail" id="succubus-detail">
+    <div class="close-btn">&times;</div>
+    <div class="detail-grid">
+        <img src="https://i.ibb.co/6rfxw6C/demon3.png">
+        <div>
+            <h2>Succubus</h2>
+            <div class="block">
+                <h4>Biography & Personality</h4>
+                <p>
+                    The Succubus doesn't feed on flesh or blood—she feeds on desire,
+                    passion, and will. She appears as the perfect embodiment of her
+                    victim's deepest longings, only to consume their life force
+                    once they surrender to her.
+                    <br><br>
+                    Her beauty is her weapon, her charm her armor, and her embrace
+                    is death. She takes particular pleasure in corrupting the virtuous,
+                    in making saints question their devotion, in turning love into obsession.
+                </p>
+            </div>
+            <div class="block">
+                <h4>Personality Traits</h4>
+                <div class="traits">
+                    <span>Seductive</span>
+                    <span>Manipulative</span>
+                    <span>Patient</span>
+                    <span>Hungry</span>
+                    <span>Beautiful</span>
+                </div>
+            </div>
+            <div class="block">
+                <h4>Roleplay Scenario</h4>
+                <p>
+                    The Succubus has chosen you as her next victim. She appears as your
+                    perfect partner, fulfilling every fantasy, understanding every desire.
+                    But as you grow closer, you begin to notice strange symptoms:
+                    fading memories, lost passions, a growing emptiness where your soul used to be.
+                    <br><br>
+                    She's not just taking your life—she's taking everything that makes you who you are.
+                </p>
+            </div>
+            <div class="block">
+                <h4>Your Role</h4>
+                <p>
+                    You are her prey. Your challenge is to resist her charms,
+                    to see through the illusion, to hold onto your identity even as
+                    she tries to consume it. But be warned: the greatest danger isn't
+                    that she'll take everything from you—it's that part of you might
+                    want her to.
+                </p>
+                <div class="your-role">The Prey</div>
+            </div>
+            <div class="hint">Click the cross to close the description</div>
+</div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const cards = document.querySelectorAll('.card');
+    const overlay = document.getElementById('overlay');
+    const closeButtons = document.querySelectorAll('.close-btn');
+    const details = document.querySelectorAll('.detail');
+    
+    // Открытие детального описания при клике на карточку
+    cards.forEach(card => {
+        card.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const characterId = this.getAttribute('data-character');
+            openDetail(characterId);
+        });
+    });
+    
+// Замените текущие функции openDetail и обработчики закрытия этим кодом:
+
+// Открытие детального описания с анимацией
+function openDetail(characterId) {
+    // Скрываем все описания
+    details.forEach(detail => {
+        detail.classList.remove('active');
+        detail.style.display = 'none';
+    });
+    
+    // Показываем нужное описание
+    const detailElement = document.getElementById(`${characterId}-detail`);
+    if (detailElement) {
+        // Показываем элемент без анимации
+        detailElement.style.display = 'block';
+        overlay.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+        
+        // Небольшая задержка для применения начальных стилей
+        setTimeout(() => {
+            detailElement.classList.add('active');
+            overlay.classList.add('active');
+        }, 10);
+    }
+}
+
+// Закрытие детального описания с анимацией
+function closeAllDetails() {
+    // Запускаем анимацию исчезновения
+    details.forEach(detail => detail.classList.remove('active'));
+    overlay.classList.remove('active');
+    
+    // После завершения анимации скрываем элементы
+    setTimeout(() => {
+        details.forEach(detail => detail.style.display = 'none');
+        overlay.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }, 300); // Время должно совпадать с transition в CSS (0.9s = 900ms)
+}
+
+// Обновленные обработчики событий
+closeButtons.forEach(btn => {
+    btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        closeAllDetails();
+    });
+});
+
+// Закрытие по клику на оверлей
+overlay.addEventListener('click', function() {
+    closeAllDetails();
+});
+
+// Закрытие по Escape
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        closeAllDetails();
+    }
+});
+    
+    // GSAP анимации
+    gsap.from('.world-title', {
+        scrollTrigger: {
+            trigger: '.world',
+            start: 'top 80%',
+        },
+        y: 50,
+        opacity: 0,
+        duration: 1,
+        stagger: 0.3
+    });
+    
+    gsap.from('.card', {
+        scrollTrigger: {
+            trigger: '.cards',
+            start: 'top 85%',
+        },
+        y: 30,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.2
+    });
+});
+</script>
 </body>
 </html>
