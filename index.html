@@ -54,7 +54,7 @@ nav a:hover { opacity:0.6; }
 .world-title::after { content:""; display:block; width:80px; height:2px; margin:12px auto 0; border-radius:1px; }
 .world-desc { font-size:1.1rem; padding:20px 30px; border-radius:12px; margin-bottom:30px; position:relative; animation: fadeUp 1.2s ease forwards; }
 
-/* CARDS - ИСПРАВЛЕННАЯ ВЕРСИЯ */
+/* CARDS - ИСПРАВЛЕННАЯ ВЕРСИЯ С ВЫСОКИМИ КАРТОЧКАМИ */
 .cards { 
     display: grid; 
     grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); 
@@ -63,10 +63,10 @@ nav a:hover { opacity:0.6; }
     perspective: 1200px; 
 }
 
-/* Основной контейнер карточки */
+/* Основной контейнер карточки - УВЕЛИЧЕНА ВЫСОТА */
 .card {
     width: 100%;
-    height: 380px;
+    height: 430px; /* Увеличено с 380px до 430px */
     position: relative;
     cursor: pointer;
     z-index: 1;
@@ -118,12 +118,14 @@ nav a:hover { opacity:0.6; }
     text-align: center; 
     border: 1px solid var(--border-soft); 
     font-size: 1rem; 
+    justify-content: flex-start;
+    padding-top: 25px;
 }
 
 .card-img { 
     width: 100%; 
-    max-width: 180px; 
-    height: 240px; 
+    max-width: 200px; /* Увеличено с 180px */
+    height: 260px; /* Увеличено с 240px */
     border-radius: 10px; 
     overflow: hidden; 
     margin-bottom: 12px; 
@@ -137,9 +139,34 @@ nav a:hover { opacity:0.6; }
     display: block; 
 }
 
+/* Род деятельности (новый элемент) */
+.character-role {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 5px;
+    pointer-events: none;
+}
+
+.angels .character-role {
+    color: rgba(200,225,255,0.7);
+}
+
+.demons .character-role {
+    color: rgba(255,80,80,0.7);
+}
+
+/* Имя персонажа - немного поднято */
+.card h3 {
+    margin-top: 5px;
+    pointer-events: none;
+}
+
 /* Tags */
 .tags { 
-    margin-top: 12px; 
+    margin-top: 20px; 
     display: flex; 
     flex-wrap: wrap; 
     justify-content: center; 
@@ -242,10 +269,24 @@ nav a:hover { opacity:0.6; }
 .detail h2 {
     font-family: 'Cinzel Decorative', serif;
     font-size: 2rem;
+    margin-bottom: 5px;
+}
+
+/* Род деятельности в детальном описании */
+.detail-role {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
     margin-bottom: 20px;
 }
-.angel-detail h2 { color: var(--angel-accent); }
-.demon-detail h2 { color: var(--demon-accent); }
+
+.angel-detail h2, .angel-detail .detail-role { 
+    color: var(--angel-accent); 
+}
+.demon-detail h2, .demon-detail .detail-role { 
+    color: var(--demon-accent); 
+}
 
 .block {
     margin-bottom: 32px;
@@ -311,6 +352,46 @@ nav a:hover { opacity:0.6; }
 .demon-detail .your-role { 
     background: rgba(255,100,100,0.2); 
     color: var(--demon-accent);
+}
+
+/* Кнопка скачивания (новый элемент) */
+.download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 24px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border-soft);
+    border-radius: 8px;
+    color: var(--text-main);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.download-btn:hover {
+    background: rgba(255,255,255,0.1);
+    transform: translateY(-2px);
+}
+
+.angel-detail .download-btn {
+    border-color: rgba(200,220,255,0.3);
+    color: var(--angel-accent);
+}
+
+.demon-detail .download-btn {
+    border-color: rgba(255,100,100,0.3);
+    color: var(--demon-accent);
+}
+
+.download-btn::before {
+    content: "↓";
+    font-size: 1rem;
 }
 
 /* Подсказка */
@@ -479,7 +560,6 @@ footer { text-align:center; padding:30px; font-size:0.85rem; color:#777; border-
     color: rgba(200,225,255,0.6);
     opacity: 1;
     pointer-events: none;
-    /* Убрали transition для letter-spacing */
 }
 
 /* Вращающиеся глифы вокруг карточки ангелов - ТОЛЬКО ПРИ НАВЕДЕНИИ */
@@ -579,6 +659,15 @@ footer { text-align:center; padding:30px; font-size:0.85rem; color:#777; border-
     .world-detail img {
         height: 200px;
     }
+    
+    .card {
+        height: 400px;
+    }
+    
+    .card-img {
+        max-width: 180px;
+        height: 230px;
+    }
 }
 </style>
 </head>
@@ -619,10 +708,11 @@ footer { text-align:center; padding:30px; font-size:0.85rem; color:#777; border-
             <div class="card-inner">
                 <div class="card-front">
                     <div class="card-img"><img src="Сайт/images/3.jpg" alt="Cairen Iscariot"></div>
+                    <div class="character-role">Angel of Soul Distribution</div>
                     <h3>Cairen Iscariot</h3>
                 </div>
                 <div class="card-back">
-                    <p>The angel of soul distribution who once noticed you and is now burning with desire to drag you into bed.</p>
+                    <p>Cairen is an angel - hardly fitting the role, with his black hair and wicked grin. A fellow soul distributor, he has taken a clear interest in you and persistently tries to lure you into bed, somehow avoiding banishment from Heaven altogether.</p>
                     <div class="tags">
                         <span>Dominant</span>
                         <span>AnyPOV</span>
@@ -638,9 +728,12 @@ footer { text-align:center; padding:30px; font-size:0.85rem; color:#777; border-
             <div class="card-inner">
                 <div class="card-front">
                     <div class="card-img"><img src="Сайт/images/2.jpg" alt="Unknown"></div>
+                    <div class="character-role">Archon</div>
                     <h3>Unknown</h3>
                 </div>
                 <div class="card-back">
+                    <div class="character-role">Archon</div>
+                    <h3>Unknown</h3>
                     <p>?</p>
                     <div class="tags">
                         <span>?</span>
@@ -657,9 +750,12 @@ footer { text-align:center; padding:30px; font-size:0.85rem; color:#777; border-
             <div class="card-inner">
                 <div class="card-front">
                     <div class="card-img"><img src="Сайт/images/2.jpg" alt="Unknown"></div>
+                    <div class="character-role">Virtue</div>
                     <h3>Unknown</h3>
                 </div>
                 <div class="card-back">
+                    <div class="character-role">Virtue</div>
+                    <h3>Unknown</h3>
                     <p>?</p>
                     <div class="tags">
                         <span>?</span>
@@ -691,9 +787,12 @@ footer { text-align:center; padding:30px; font-size:0.85rem; color:#777; border-
             <div class="card-inner">
                 <div class="card-front">
                     <div class="card-img"><img src="Сайт/images/2.jpg" alt="Unknown"></div>
+                    <div class="character-role">Lesser Demon</div>
                     <h3>Unknown</h3>
                 </div>
                 <div class="card-back">
+                    <div class="character-role">Lesser Demon</div>
+                    <h3>Unknown</h3>
                     <p>?</p>
                     <div class="tags">
                         <span>?</span>
@@ -711,9 +810,12 @@ footer { text-align:center; padding:30px; font-size:0.85rem; color:#777; border-
             <div class="card-inner">
                 <div class="card-front">
                     <div class="card-img"><img src="Сайт/images/2.jpg" alt="Unknown"></div>
+                    <div class="character-role">Imp Lord</div>
                     <h3>Unknown</h3>
                 </div>
                 <div class="card-back">
+                    <div class="character-role">Imp Lord</div>
+                    <h3>Unknown</h3>
                     <p>?</p>
                     <div class="tags">
                         <span>?</span>
@@ -730,9 +832,12 @@ footer { text-align:center; padding:30px; font-size:0.85rem; color:#777; border-
             <div class="card-inner">
                 <div class="card-front">
                     <div class="card-img"><img src="Сайт/images/2.jpg" alt="Unknown"></div>
+                    <div class="character-role">Abyss Knight</div>
                     <h3>Unknown</h3>
                 </div>
                 <div class="card-back">
+                    <div class="character-role">Abyss Knight</div>
+                    <h3>Unknown</h3>
                     <p>?</p>
                     <div class="tags">
                         <span>?</span>
@@ -761,37 +866,44 @@ footer { text-align:center; padding:30px; font-size:0.85rem; color:#777; border-
 <div class="detail angel-detail" id="seraph-detail">
     <div class="close-btn">&times;</div>
     <div class="detail-grid">
-        <img src="Сайт/images/2.jpg" alt="Unknown">
+        <img src="Сайт/images/3.jpg" alt="Cairen Iscariot">
         <div>
-            <h2>Unknown</h2>
+            <h2>Cairen Iscariot</h2>
+            <div class="detail-role">Angel of Soul Distribution</div>
             <div class="block">
                 <h4>Biography & Personality</h4>
                 <p>
-                    ?
+                    Cairen is an angel of soul distribution from Angelic Enlightenment. In his human life, he chased thrill and excitement, dying young after a reckless accident. Though deemed worthy of Heaven, he quickly grew bored with eternal perfection.
+
+Carefree, shameless, and provocative, Cairen dislikes rules and seriousness, preferring teasing and boundary-pushing to keep himself entertained. He masks his fear of stagnation with humor, flirtation, and reckless charm. 
                 </p>
             </div>
             <div class="block">
                 <h4>Personality Traits</h4>
                 <div class="traits">
-                    <span>?</span>
-                    <span>?</span>
-                    <span>?</span>
-                    <span>?</span>
-                    <span>?</span>
+                    <span>Provocative</span>
+                    <span>Carefree</span>
+                    <span>Shameless</span>
+                    <span>Hedonistic</span>
+                    <span>Restless</span>
                 </div>
             </div>
             <div class="block">
                 <h4>Roleplay Scenario</h4>
                 <p>
-                    ?
+                    You and Cairen work as soul distributors, stationed between Heaven and Hell. During a routine shift, Cairen once again finds an excuse to abandon his duties and descend to you. What starts as teasing and playful provocation slowly turns into a charged interaction, blurring the line between annoyance and attraction as Cairen relentlessly tests your patience - and your resolve.
                 </p>
             </div>
             <div class="block">
                 <h4>Your Role</h4>
                 <p>
-                    ?
+                    You are a soul distributor aligned with Hell, carrying out your duties while enduring Cairen’s constant teasing and unwanted attention. Whether you resist him, tolerate him, or slowly give in is entirely up to you.
                 </p>
-                <div class="your-role">?</div>
+                <div class="your-role">Soul Distributor</div>
+            </div>
+            <div class="block">
+                <h4>Download Character</h4>
+                <a href="Сайт/files/Cairen Iscariot.png" download class="download-btn">Download character file</a>
             </div>
             <div class="hint">Click the cross to close the description</div>
         </div>
@@ -805,6 +917,7 @@ footer { text-align:center; padding:30px; font-size:0.85rem; color:#777; border-
         <img src="Сайт/images/2.jpg" alt="Unknown">
         <div>
             <h2>Unknown</h2>
+            <div class="detail-role">Archon</div>
             <div class="block">
                 <h4>Biography & Personality</h4>
                 <p>
@@ -833,6 +946,10 @@ footer { text-align:center; padding:30px; font-size:0.85rem; color:#777; border-
                     ?
                 </p>
                 <div class="your-role">?</div>
+            </div>
+            <div class="block">
+                <h4>Download Character</h4>
+                <a href="Сайт/files/archon.json" download class="download-btn">Download character file</a>
             </div>
             <div class="hint">Click the cross to close the description</div>
         </div>
@@ -846,6 +963,7 @@ footer { text-align:center; padding:30px; font-size:0.85rem; color:#777; border-
         <img src="Сайт/images/2.jpg" alt="Unknown">
         <div>
             <h2>Unknown</h2>
+            <div class="detail-role">Virtue</div>
             <div class="block">
                 <h4>Biography & Personality</h4>
                 <p>
@@ -874,6 +992,10 @@ footer { text-align:center; padding:30px; font-size:0.85rem; color:#777; border-
                    ?
                 </p>
                 <div class="your-role">?</div>
+            </div>
+            <div class="block">
+                <h4>Download Character</h4>
+                <a href="Сайт/files/virtue.json" download class="download-btn">Download character file</a>
             </div>
             <div class="hint">Click the cross to close the description</div>
         </div>
@@ -887,6 +1009,7 @@ footer { text-align:center; padding:30px; font-size:0.85rem; color:#777; border-
        <img src="Сайт/images/2.jpg" alt="Unknown">
         <div>
             <h2>Unknown</h2>
+            <div class="detail-role">Lesser Demon</div>
             <div class="block">
                 <h4>Biography & Personality</h4>
                 <p>
@@ -915,6 +1038,10 @@ footer { text-align:center; padding:30px; font-size:0.85rem; color:#777; border-
                     ?
                 </p>
                 <div class="your-role">?</div>
+            </div>
+            <div class="block">
+                <h4>Download Character</h4>
+                <a href="Сайт/files/unnamed.json" download class="download-btn">Download character file</a>
             </div>
             <div class="hint">Click the cross to close the description</div>
         </div>
@@ -928,6 +1055,7 @@ footer { text-align:center; padding:30px; font-size:0.85rem; color:#777; border-
         <img src="Сайт/images/2.jpg" alt="Unknown">
         <div>
             <h2>Unknown</h2>
+            <div class="detail-role">Imp Lord</div>
             <div class="block">
                 <h4>Biography & Personality</h4>
                 <p>
@@ -956,6 +1084,10 @@ footer { text-align:center; padding:30px; font-size:0.85rem; color:#777; border-
                     ?
                 </p>
                 <div class="your-role">?</div>
+            </div>
+            <div class="block">
+                <h4>Download Character</h4>
+                <a href="Сайт/files/imp_lord.json" download class="download-btn">Download character file</a>
             </div>
             <div class="hint">Click the cross to close the description</div>
         </div>
@@ -969,6 +1101,7 @@ footer { text-align:center; padding:30px; font-size:0.85rem; color:#777; border-
         <img src="Сайт/images/2.jpg" alt="Unknown">
         <div>
             <h2>Unknown</h2>
+            <div class="detail-role">Abyss Knight</div>
             <div class="block">
                 <h4>Biography & Personality</h4>
                 <p>
@@ -997,6 +1130,10 @@ footer { text-align:center; padding:30px; font-size:0.85rem; color:#777; border-
                     ?
                 </p>
                 <div class="your-role">?</div>
+            </div>
+            <div class="block">
+                <h4>Download Character</h4>
+                <a href="Сайт/files/abyss_knight.json" download class="download-btn">Download character file</a>
             </div>
             <div class="hint">Click the cross to close the description</div>
         </div>
